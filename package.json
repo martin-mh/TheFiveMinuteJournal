@@ -1,0 +1,24 @@
+{
+  "name": "the-five-minute-journal",
+  "version": "0.0.1",
+  "description": "The famous \"Five Minute Journal\" now on the web.",
+  "main": "release.js",
+  "dependencies": {
+    "mongoose": "^4.4.17",
+    "total.js": "^1.9.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-mh/TheFiveMinuteJournal.git"
+  },
+  "author": "Martin Hammerchmidt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martin-mh/TheFiveMinuteJournal/issues"
+  },
+  "homepage": "https://github.com/martin-mh/TheFiveMinuteJournal#readme"
+}

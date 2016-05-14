@@ -1,0 +1,135 @@
+@{title('The Five Minute Journal')}
+
+<h3 class="center">
+	Premièrement, je vais vous demander de vous inscrire ou de vous connecter.
+</h3>
+
+<!--
+<div class="grid">
+	<div class="row">
+		<div class="col-6"><a class="social-btn social-btn-facebook">Facebook</a></div>
+		<div class="col-6"><a class="social-btn social-btn-twitter">Twitter</a></div>
+	</div>
+	<div class="row">
+		<div class="col-6"><a class="social-btn social-btn-google">Google</a></div>
+		<div class="col-6"><a class="social-btn social-btn-github">Github</a></div>
+	</div>
+</div>
+-->
+
+<div class="grid">
+	<div class="row">
+		<div class="col-6">
+			<h4 class="center">
+				Se connecter
+			</h4>
+
+			<p>
+				<form>
+					<input id="login-mail" class="form-input" type="text" placeholder="Adresse Email"><br>
+					<input id="login-password" class="form-input" type="password" placeholder="Mot de passe">
+					<div class="center"><button id="login-submit" class="btn btn-big" type="submit">Se connecter</button></div>
+				</form>
+			</p>
+		</div>
+		<div class="col-6">
+			<h4 class="center">
+				S'inscrire
+			</h4>
+
+			<p>
+				<form>
+					<input id="register-firstname" class="form-input" type="text" placeholder="Prénom"><br>
+					<input id="register-lastname" class="form-input" type="text" placeholder="Nom"><br>
+					<input id="register-mail" class="form-input" type="text" placeholder="Adresse Email"><br>
+					<input id="register-password" class="form-input" type="password" placeholder="Mot de passe"><br>
+					<input id="register-password2" class="form-input" type="password" placeholder="Vérification du mot de passe">
+					<div class="center"><a id="register-submit" class="btn btn-big">S'inscrire</a></div>
+				</form>
+			</p>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function validateEmail(email)
+{
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+$('#register-submit').click(function()
+{
+	var firstName = $('#register-firstname');
+	var lastName = $('#register-lastname');
+	var mail = $('#register-mail');
+	var password1 = $('#register-password');
+	var password2 = $('#register-password2');
+
+	var step1 = false;
+
+	if(firstName.val() === '')
+	{
+		firstName.addClass('form-error');
+		step1 = true;
+	} else
+		firstName.removeClass('form-error');
+
+	if(lastName.val() === '')
+	{
+		lastName.addClass('form-error');
+		step1 = true;
+	} else
+		lastName.removeClass('form-error');
+
+	if(mail.val() === '')
+	{
+		mail.addClass('form-error');
+		step1 = true;
+	} else
+		mail.removeClass('form-error');
+
+	if(password1.val() === '')
+	{
+		password1.addClass('form-error');
+		step1 = true;
+	} else
+		password1.removeClass('form-error');
+
+	if(password2.val() === '')
+	{
+		password2.addClass('form-error');
+		step1 = true;
+	} else
+		password2.removeClass('form-error');
+
+	if(step1)
+		return;
+
+	var step2 = false;
+
+	if(password1.val() !== password2.val())
+	{
+		password1.addClass('form-error');
+		password2.addClass('form-error');
+		step2 = true;
+
+	} else
+	{
+		password1.removeClass('form-error');
+		password2.removeClass('form-error');
+	}
+
+	if(!validateEmail(mail.val()))
+	{
+		mail.addClass('form-error');
+		step2 = true;
+	} else
+		mail.removeClass('form-error');
+
+	if(step2)
+		return;
+
+	var xhr = $.ajax('/post/register', {success: success});
+});
+</script>
