@@ -167,3 +167,13 @@ footer
 	border-color: #355088;
 	color: white!important;
 }
+
+.small
+{
+	font-size: 0.85em;
+}
+
+.red
+{
+	color: red;
+}

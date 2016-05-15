@@ -3,6 +3,9 @@ author                          : Martin Hammerchmidt
 version                         : 0.0.1
 secret                          : kfndhxisuzlkddn
 
+// Database
+database: mongodb://localhost/tfmwj
+
 // Mail settings
 mail.smtp                       : smtp.yourwebsite.com
 mail.smtp.options               : {"secure":false,"port":25,"user":"","password":"","timeout":10000}

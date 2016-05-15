@@ -45,6 +45,7 @@
 					<input id="register-password" class="form-input" type="password" placeholder="Mot de passe"><br>
 					<input id="register-password2" class="form-input" type="password" placeholder="Vérification du mot de passe">
 					<div class="center"><a id="register-submit" class="btn btn-big">S'inscrire</a></div>
+					<p id="register-error-message" class="small red center"></p>
 				</form>
 			</p>
 		</div>
@@ -130,6 +131,19 @@ $('#register-submit').click(function()
 	if(step2)
 		return;
 
-	var xhr = $.ajax('/post/register', {success: success});
+	var xhr = $.ajax(
+	{
+		url: '/api/register_user',
+		type: 'POST',
+		dataType: 'json',
+		data: 'email=' + mail.val() + '&password=' + password1.val() + '&firstname=' + firstName.val() + '&lastname=' + lastName.val(),
+		success: function(res, status)
+		{
+			if(!res.success)
+			{
+				$('#register-error-message').html(res.message);
+			}
+		}
+	});
 });
 </script>
