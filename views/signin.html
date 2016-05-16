@@ -28,7 +28,8 @@
 				<form>
 					<input id="login-mail" class="form-input" type="text" placeholder="Adresse Email"><br>
 					<input id="login-password" class="form-input" type="password" placeholder="Mot de passe">
-					<div class="center"><button id="login-submit" class="btn btn-big" type="submit">Se connecter</button></div>
+					<div class="center"><a id="login-submit" class="btn btn-big" type="submit">Se connecter</a></div>
+					<p id="login-error-message" class="small red center"></p>
 				</form>
 			</p>
 		</div>
@@ -131,7 +132,7 @@ $('#register-submit').click(function()
 	if(step2)
 		return;
 
-	var xhr = $.ajax(
+	$.ajax(
 	{
 		url: '/api/register_user',
 		type: 'POST',
@@ -142,8 +143,61 @@ $('#register-submit').click(function()
 			if(!res.success)
 			{
 				$('#register-error-message').html(res.message);
+				return;
 			}
+
+			window.location.replace('/');
 		}
 	});
+});
+
+$('#login-submit').click(function()
+{
+	var mail = $('#login-mail');
+	var password = $('#login-password');
+
+	var step1 = false;
+
+	if(mail.val() === '' || !validateEmail(mail.val()))
+	{
+		mail.addClass('form-error');
+		step1 = true;
+	} else 
+	{
+		mail.removeClass('form-error');
+	}
+
+	if(password.val() === '')
+	{
+		password.addClass('form-error');
+		step1 = true;
+	} else
+	{
+		password.removeClass('form-error');
+	}
+
+	if(step1)
+	{
+		return;
+	}
+
+	$.ajax(
+	{
+		url: '/api/login_user',
+		type: 'POST',
+		dataType: 'json',
+		data: 'email=' + mail.val() + '&password=' + password.val(),
+		success: function(res, status)
+		{
+			if(!res.success)
+			{
+				$('#login-error-message').html(res.message);
+				return;
+			}
+
+			window.location.replace('/');
+		}
+	});
+
 });
 </script>
