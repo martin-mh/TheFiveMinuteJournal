@@ -67,7 +67,7 @@ body
 { 
 	padding: 0;
 	margin: 0;
-	font: normal 14px "Open Sans";
+	font-family: "Open Sans";
 	color: #656D78;
 	background-color: white;
 	line-height: 60px;

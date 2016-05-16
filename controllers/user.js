@@ -1,20 +1,13 @@
 exports.install = function()
 {
-	F.route('/', view_index_logged, ['authorize']);
-
 	F.route('/signin', view_signin);
 	F.route('/logout', view_logout, ['authorize']);
+
+	F.route('/setup', view_setup, ['authorize']);
 
 	F.route('/api/register_user', registerUser, ['post']);
 	F.route('/api/login_user', loginUser, ['post']);
 };
-
-function view_index_logged()
-{
-	let self = this;
-	let auth = F.module('auth');
-	self.plain('You are logged as {0}.'.format(self.user.email));
-}
 
 function validateEmail(email)
 {
@@ -138,4 +131,10 @@ function view_logout()
 
 	auth.logoff(self, self.user._id);
 	self.redirect('/', true);
+}
+
+function view_setup()
+{
+	let self = this;
+	self.view('setup', self.user);
 }
